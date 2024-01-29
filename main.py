@@ -1,126 +1,169 @@
-import numpy as np
 import math
 import random
 import matplotlib.pyplot as plt
 
 
-def exp(la):
-    return -math.log(random.random()) / la
+def fact(n):
+    if n <= 1:
+        return 1
+    return n * fact(n - 1)
 
 
-def Poisson(la):
-    s = 0.0
-    k = -1
-    while True:
-        s += exp(1)
-        k += 1
-        if not s < la:
-            break
-    return k
+d = []
+n = []
+T = 10000
+n_accuracy = 10
+x = []
+y_pract_MD = []
+y_teor_MD = []
 
+y_pract_MN = []
+y_teor_MN = []
 
-def Time_sharing(ax1, ax2, ax3, la, M):
-    Mn = np.zeros(la.size)
-    Md = np.zeros(la.size)
-    Me = np.zeros(la.size)
-    Ml = np.zeros(la.size)
+print("Sync")
+for lam in range(1, n_accuracy):
+    lambd = lam / n_accuracy
+    x.append(lambd)
+    w = [False for b in range(int(T))]
+    d.clear()
+    nn = 0
+    n_ab_out_ar = [0 for k in range(int(T))]
+    for i in range(int(T)):
+        num_of_ab = 0
+        rnd = random.uniform(0, 1)
+        pr_j = 0
+        for j in range(10):
+            pr_j = pr_j + ((lambd ** j) * math.exp(-lambd)) / fact(j)
+            if rnd < pr_j:
+                num_of_ab = j
+                break
+        nn += (num_of_ab + n_ab_out_ar[i])
+        n.append(nn)
 
-    for l in la:
-        Nsum = 0
-        Dsum = 0
-        Ssum = 0
-        Esum = 0
-        Subs = np.zeros(M)
-        queue = np.zeros(M)
-        k = 0
-        for window in range(time):
-            for i, _ in enumerate(Subs):
-                Subs[i] = Poisson(l / M)
-                for s in range(int(Subs[i])):
-                    Dsum += random.random()
-                    Ssum += 1
-            if queue[k] != 0:
-                queue[k] -= 1
-                Esum += 1
-            for i, sub in enumerate(Subs):
-                queue[i] += sub
-                Nsum += queue[i]
-                Dsum += queue[i]
-            k = (k + 1) % M
-        Mn[np.where(la == l)] = Nsum / time
-        Md[np.where(la == l)] = Dsum / Ssum if Ssum != 0 else 1
-        Me[np.where(la == l)] = Esum / time
-        Ml[np.where(la == l)] = Ssum / time
+        a = [random.uniform(0, 1) for k in range(num_of_ab)]
+        a.sort()
+        f = 0
+        for k in a:
+            if i + 1 >= T:
+                break
+            if not w[i + 1]:
+                d.append(k + 1)
+                n_ab_out_ar[i + 1] = -1
+                w[i + 1] = True
+            else:
+                b = i + 2
+                if b >= T:
+                    break
+                d_temp = k + 2
+                f = 0
+                while w[b]:
+                    b += 1
+                    if b >= T:
+                        f = 1
+                        break
+                    d_temp += 1
+                if f:
+                    break
+                d.append(d_temp)
+                n_ab_out_ar[b] = -1
+                w[b] = True
 
-    ax1.plot(la, Mn, label="M[N]")
-    ax2.plot(la, Md, label="M[D]")
-    ax3.plot(la, Me, label="Lвых")
-    ax3.plot(la, Ml, label="Lпракт")
+    MD = sum(d) / len(d)
+    MD_teor = (2 - lambd) / (2 - 2 * lambd) + 0.5
+    MN = sum(n) / T
+    MN_teor = (2 * lambd - lambd ** 2) / (2 - 2 * lambd)
+    y_pract_MD.append(MD)
+    y_teor_MD.append(MD_teor)
+    y_pract_MN.append(MN)
+    y_teor_MN.append(MN_teor)
+    print(lambd)
+    print("pract M[D]=", MD)
+    print("teor M[D]=", MD_teor)
+    d.clear()
+    n.clear()
 
+plt.figure(1)
+plt.title("Sync M[D]")
+plt.plot(x, y_pract_MD, label="pract")
+plt.plot(x, y_teor_MD, label="teor")
+plt.legend()
+plt.xlabel("lambda")
+plt.ylabel("M[D]")
+plt.savefig("Sync_M_D.png")
 
-def On_reqest(ax1, ax2, ax3, la, ty, M):
-    Mn = np.zeros(la.size)
-    Md = np.zeros(la.size)
-    Me = np.zeros(la.size)
-    Ml = np.zeros(la.size)
-    for l in la:
-        Nsum = 0
-        Dsum = 0
-        Ssum = 0
-        Esum = 0
-        Subs = np.zeros(M, dtype=int)
-        queue = np.zeros(M)
-        k = 0
-        for window in range(time):
-            h = np.zeros(M, dtype=int)
-            for i, _ in enumerate(Subs):
-                Subs[i] = Poisson((l * ty) / M)
-                for s in range(Subs[i]):
-                    Dsum += random.uniform(0.0, ty)
-                    Ssum += 1
-            if queue[k] != 0:
-                queue[k] -= 1
-                for j, q in enumerate(queue):
-                    Dsum += q
-                    h[j] = Poisson(l / M)
-                    Dsum += random.random()
-                    Ssum += h[j]
-                Esum += 1
-            for i, sub in enumerate(Subs):
-                queue[i] += sub
-                Dsum += queue[i] * ty
-                queue[i] += h[i]
-                Nsum += queue[i]
-            k = (k + 1) % M
-        Mn[np.where(la == l)] = Nsum / ((time) * ty + Esum)
-        Md[np.where(la == l)] = Dsum / Ssum if Ssum != 0 else 1
-        Me[np.where(la == l)] = Esum / ((time) * ty + Esum)
-        Ml[np.where(la == l)] = Ssum / ((time) * ty + Esum)
+plt.figure(2)
+plt.title("Sync M[N]")
+plt.plot(x, y_pract_MN, label="pract")
+plt.plot(x, y_teor_MN, label="teor")
+plt.legend()
+plt.xlabel("lambda")
+plt.ylabel("M[N]")
+plt.savefig("Sync_M_N.png")
 
-    ax1.plot(la, Mn, label="M[N]req")
-    ax2.plot(la, Md, label="M[D]req")
-    ax3.plot(la, Me, label="Lвыхreq")
-    ax3.plot(la, Ml, label="Lпрактreq")
+y_pract_MD.clear()
+y_teor_MD.clear()
+y_pract_MN.clear()
 
+#print("Async")
+for lam in range(1, n_accuracy):
+    lambd = lam / n_accuracy
+    d.clear()
+    n = [0 for k in range(T)]
+    times = []
+    in_ab = [0 for k in range(T)]
+    out_ab = [0 for k in range(T)]
+    for i in range(int(T)):
+        num_of_ab = 0
+        rnd = random.uniform(0, 1)
+        pr_j = 0
+        for j in range(10):
+            pr_j = pr_j + ((lambd ** (j)) * math.exp(-lambd)) / fact(j)
+            if rnd < pr_j:
+                num_of_ab = j
+                break
+        a = [random.uniform(0, 1) for k in range(num_of_ab)]
+        a.sort()
+        in_ab[i] = num_of_ab
+        for k in a:
+            times.append(i + k)
+    d.append(1)
+    last = 1 + times[0]
+    out_ab[math.floor(1 + times[0])] += 1
+    for i in range(1, len(times)):
+        if times[i] < last:
+            service_time_i = last - times[i] + 1
+            d.append(service_time_i)
+            last = service_time_i + times[i]
+            if math.floor(last) < T:
+                out_ab[math.floor(last)] += 1
+        else:
+            d.append(1)
+            last = times[i] + 1
+            if math.floor(last) < T:
+                out_ab[math.floor(last)] += 1
+    n[0] = in_ab[0]
+    #print(in_ab[0], out_ab[0], in_ab[1], out_ab[1])
 
-la = np.arange(0.001, 1.5, 0.1)
-M = int(input("Enter M = "))
-ty = float(input("Enter ty = "))
-time = 10000
+    for i in range(1, T):
+        n[i] = n[i - 1] + in_ab[i] - out_ab[i]
+    y_pract_MD.append(sum(d) / len(d))
+    y_teor_MD.append((2 - lambd) / (2 - 2 * lambd))
+    y_pract_MN.append(sum(n) / T)
 
-fig1, ax1 = plt.subplots()
-fig2, ax2 = plt.subplots()
-fig3, ax3 = plt.subplots()
+plt.figure(3)
+plt.title("Async M[D]")
+plt.plot(x, y_pract_MD, label="pract")
+plt.plot(x, y_teor_MD, label="teor")
+plt.legend()
+plt.xlabel("lambda")
+plt.ylabel("M[D]")
+plt.savefig("Async M[D].png")
 
-Time_sharing(ax1, ax2, ax3, la, M)
-On_reqest(ax1, ax2, ax3, la, ty, M)
-
-ax1.set_ylim([0, 10])
-ax1.grid()
-ax1.legend()
-ax2.set_ylim([0, 10])
-ax2.grid()
-ax2.legend()
-ax3.grid()
-ax3.legend()
-plt.show()
+plt.figure(4)
+plt.title("Async M[N]")
+plt.plot(x, y_pract_MN, label="pract")
+plt.plot(x, y_teor_MN, label="teor")
+plt.legend()
+plt.xlabel("lambda")
+plt.ylabel("M[N]")
+plt.savefig("Async M[N].png")

@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1afb4bd2-53ab-4d7f-bb4b-6d76a14da63f" name="Changes" comment="based">
-      <change afterPath="$PROJECT_DIR$/async.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sync.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/teor.py" afterDir="false" />
+    <list default="true" id="1afb4bd2-53ab-4d7f-bb4b-6d76a14da63f" name="Changes" comment="сделал синхроную и асинхронную">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -70,11 +67,20 @@
       <option name="project" value="LOCAL" />
       <updated>1705719845629</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="сделал синхроную и асинхронную">
+      <option name="closed" value="true" />
+      <created>1706163519244</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1706163519244</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="based" />
-    <option name="LAST_COMMIT_MESSAGE" value="based" />
+    <MESSAGE value="сделал синхроную и асинхронную" />
+    <option name="LAST_COMMIT_MESSAGE" value="сделал синхроную и асинхронную" />
   </component>
 </project>
