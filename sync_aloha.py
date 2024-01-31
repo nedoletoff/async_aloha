@@ -33,7 +33,7 @@ class Messages:
     def set(self, m: int, t: int, val: int):
         self.arr[t][m] = val
 
-    def move(self, m: int, t: int) -> int:
+    def move(self, m: int, t: int):
         self.moved = True
         self.arr[t + 1][m] += self.arr[t][m]
         self.set(m, t, 0)
@@ -134,14 +134,14 @@ def calculate(M, x, T, p_ab=0.3, optional=False):
 
 
 if __name__ == "__main__":
-    x = [i / 100 for i in range(1, 100)]
+    x = [i / 20 for i in range(1, 20)]
 
     plt.figure(1)
     md, mn = calculate(10, x, 1000, 0.32, False)
     plt.plot(x, md)
     plt.title("ALOHA M[D]")
     plt.xlabel("lambda")
-    plt.ylabel("M[D]")
+    plt.ylabel("Среднее время задержки")
     plt.savefig("ALOHA_M_D.png")
 
     plt.figure(2)
@@ -156,7 +156,7 @@ if __name__ == "__main__":
     plt.title("Optional ALOHA M[D]")
     plt.plot(x, md)
     plt.xlabel("lambda")
-    plt.ylabel("M[D]")
+    plt.ylabel("Среднее время задержки")
     plt.savefig("Optional_ALOHA_M_D.png")
 
     plt.figure(4)
