@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1afb4bd2-53ab-4d7f-bb4b-6d76a14da63f" name="Changes" comment="сделал синхроную и асинхронную">
+    <list default="true" id="1afb4bd2-53ab-4d7f-bb4b-6d76a14da63f" name="Changes" comment="отредактировал">
+      <change afterPath="$PROJECT_DIR$/sync_aloha.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Async M[D].png" beforeDir="false" afterPath="$PROJECT_DIR$/Async M[D].png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Async M[N].png" beforeDir="false" afterPath="$PROJECT_DIR$/Async M[N].png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sync_M_D.png" beforeDir="false" afterPath="$PROJECT_DIR$/Sync_M_D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sync_M_N.png" beforeDir="false" afterPath="$PROJECT_DIR$/Sync_M_N.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,17 +37,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.async.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.sync.executor&quot;: &quot;Run&quot;,
-    &quot;Python.teor.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;ignore_missing_gitignore&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.async.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.sync.executor": "Run",
+    "Python.sync_aloha.executor": "Run",
+    "Python.teor.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ignore_missing_gitignore": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -75,12 +81,21 @@
       <option name="project" value="LOCAL" />
       <updated>1706163519244</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="отредактировал">
+      <option name="closed" value="true" />
+      <created>1706571190037</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1706571190037</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="based" />
     <MESSAGE value="сделал синхроную и асинхронную" />
-    <option name="LAST_COMMIT_MESSAGE" value="сделал синхроную и асинхронную" />
+    <MESSAGE value="отредактировал" />
+    <option name="LAST_COMMIT_MESSAGE" value="отредактировал" />
   </component>
 </project>
