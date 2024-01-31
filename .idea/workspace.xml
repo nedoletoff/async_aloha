@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1afb4bd2-53ab-4d7f-bb4b-6d76a14da63f" name="Changes" comment="отредактировал">
-      <change afterPath="$PROJECT_DIR$/sync_aloha.py" afterDir="false" />
+    <list default="true" id="1afb4bd2-53ab-4d7f-bb4b-6d76a14da63f" name="Changes" comment="вариант алохи когда у каждого пользователя может быть несколько сообщений в одном окошке">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Async M[D].png" beforeDir="false" afterPath="$PROJECT_DIR$/Async M[D].png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Async M[N].png" beforeDir="false" afterPath="$PROJECT_DIR$/Async M[N].png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sync_M_D.png" beforeDir="false" afterPath="$PROJECT_DIR$/Sync_M_D.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sync_M_N.png" beforeDir="false" afterPath="$PROJECT_DIR$/Sync_M_N.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sync_aloha.py" beforeDir="false" afterPath="$PROJECT_DIR$/sync_aloha.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,13 +84,29 @@
       <option name="project" value="LOCAL" />
       <updated>1706571190037</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="вариант алохи когда у каждого пользователя может быть несколько сообщений в одном окошке">
+      <option name="closed" value="true" />
+      <created>1706673442938</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1706673442938</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="based" />
     <MESSAGE value="сделал синхроную и асинхронную" />
     <MESSAGE value="отредактировал" />
-    <option name="LAST_COMMIT_MESSAGE" value="отредактировал" />
+    <MESSAGE value="вариант алохи когда у каждого пользователя может быть несколько сообщений в одном окошке" />
+    <option name="LAST_COMMIT_MESSAGE" value="вариант алохи когда у каждого пользователя может быть несколько сообщений в одном окошке" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="l_of_arr" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
