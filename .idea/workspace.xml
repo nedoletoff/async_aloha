@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1afb4bd2-53ab-4d7f-bb4b-6d76a14da63f" name="Changes" comment="алоха и алоха с опцией сообщение в первый раз отправляется вероятностью 1">
+    <list default="true" id="1afb4bd2-53ab-4d7f-bb4b-6d76a14da63f" name="Changes" comment="готовый мд">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALOHA_M_D.png" beforeDir="false" afterPath="$PROJECT_DIR$/ALOHA_M_D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALOHA_M_N.png" beforeDir="false" afterPath="$PROJECT_DIR$/ALOHA_M_N.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optional_ALOHA_M_D.png" beforeDir="false" afterPath="$PROJECT_DIR$/Optional_ALOHA_M_D.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optional_ALOHA_M_N.png" beforeDir="false" afterPath="$PROJECT_DIR$/Optional_ALOHA_M_N.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/async.py" beforeDir="false" afterPath="$PROJECT_DIR$/async_aloha.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sync_aloha.py" beforeDir="false" afterPath="$PROJECT_DIR$/sync_aloha.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,12 +40,14 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.async.executor": "Run",
+    "Python.async_aloha.executor": "Run",
     "Python.main.executor": "Run",
     "Python.sync.executor": "Run",
     "Python.sync_aloha.executor": "Run",
     "Python.teor.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ignore.virus.scanning.warn.message": "true",
     "ignore_missing_gitignore": "true"
   }
 }]]></component>
@@ -100,7 +107,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706677554154</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="готовый мд">
+      <option name="closed" value="true" />
+      <created>1706740824071</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1706740824071</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -109,9 +124,44 @@
     <MESSAGE value="отредактировал" />
     <MESSAGE value="вариант алохи когда у каждого пользователя может быть несколько сообщений в одном окошке" />
     <MESSAGE value="алоха и алоха с опцией сообщение в первый раз отправляется вероятностью 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="алоха и алоха с опцией сообщение в первый раз отправляется вероятностью 1" />
+    <MESSAGE value="готовый мд" />
+    <option name="LAST_COMMIT_MESSAGE" value="готовый мд" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/async_aloha.py</url>
+          <line>157</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/async_aloha.py</url>
+          <line>48</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/async_aloha.py</url>
+          <line>49</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/async_aloha.py</url>
+          <line>159</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/async_aloha.py</url>
+          <line>47</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/async_aloha.py</url>
+          <line>162</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="l_of_arr" />

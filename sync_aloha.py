@@ -1,5 +1,4 @@
 import random
-import math
 import scipy.stats as stats
 import matplotlib.pyplot as plt
 
@@ -84,7 +83,8 @@ def simulate(M, lam, T, p_ab=0.3, optional=False):
     l_of_arr = []
 
     # Simulation loop
-    while n_arrived != message_num:
+    while n_arrived != message_num and t < T*10:
+    #while t != 1000:
         t += 1
         busy = 0
         l_of_arr.clear()
@@ -114,11 +114,14 @@ def simulate(M, lam, T, p_ab=0.3, optional=False):
 
     # Calculate the average delay and number of users
     # T = t
-    MD = sum(delay) / len(delay)
-    MN = n_arrived / T
+    MD = 0
+    if len(delay) != 0:
+        MD = sum(delay) / len(delay)
+    MN = message_num - n_arrived
     print(f'{MD=}, {MN=}')
     print(f'{n_arrived=}, {message_num=}, {T=}, {t=}, {M=}, {lam=}, {p_ab=}')
-    return MD, MN
+    la = n_arrived / T
+    return MD, MN, la
 
 
 def calculate(M, x, T, p_ab=0.3, optional=False):
@@ -127,17 +130,20 @@ def calculate(M, x, T, p_ab=0.3, optional=False):
         res.append(simulate(M, i, T, p_ab, optional))
     md = []
     mn = []
+    la = []
     for i in res:
         md.append(i[0])
         mn.append(i[1])
-    return md, mn
+        la.append(i[2])
+    return md, mn, la
 
 
 if __name__ == "__main__":
-    x = [i / 20 for i in range(1, 20)]
+    x = [i / 10 for i in range(1, 10)]
+    #x += [2, 3, 5, 10]
 
     plt.figure(1)
-    md, mn = calculate(10, x, 1000, 0.32, False)
+    md, mn, la = calculate(10, x, 1000, 0.32, False)
     plt.plot(x, md)
     plt.title("ALOHA M[D]")
     plt.xlabel("lambda")
@@ -147,14 +153,37 @@ if __name__ == "__main__":
     plt.figure(2)
     plt.title("ALOHA M[N]")
     plt.plot(x, mn)
+    plt.grid()
     plt.xlabel("lambda")
-    plt.ylabel("M[N]")
+    plt.ylabel("Среднее значение количество абонентов в очереди")
     plt.savefig("ALOHA_M_N.png")
 
+    plt.figure(0)
+    plt.title("lam выходной")
+    plt.plot(x, la)
+    plt.grid()
+    plt.xlabel("Интенсивность входного потока")
+    plt.ylabel("Интенсивность выходного потока")
+    plt.savefig("lam_выходной.png")
+
     plt.figure(3)
-    md, mn = calculate(10, x, 1000, 0.32, True)
+    plt.title("Выходной от вероятности передачи")
+    p = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+    la_v = []
+    for i in p:
+        _, _, la = simulate(1, 0.5, 1000, i, False)
+        la_v.append(la)
+    plt.plot(p, la_v)
+    plt.grid()
+    plt.xlabel("p передачи")
+    plt.ylabel("Интенсивность выходного потока")
+    plt.savefig("Выходной_от_вероятности_передачи.png")
+'''
+    plt.figure(3)
+    md, mn, la = calculate(10, x, 1000, 0.32, True)
     plt.title("Optional ALOHA M[D]")
     plt.plot(x, md)
+    plt.grid()
     plt.xlabel("lambda")
     plt.ylabel("Среднее время задержки")
     plt.savefig("Optional_ALOHA_M_D.png")
@@ -162,6 +191,8 @@ if __name__ == "__main__":
     plt.figure(4)
     plt.title("Optional ALOHA M[N]")
     plt.plot(x, mn)
+    plt.grid()
     plt.xlabel("lambda")
-    plt.ylabel("M[N]")
+    plt.ylabel("Среднее значение количество абонентов в очереди")
     plt.savefig("Optional_ALOHA_M_N.png")
+'''
