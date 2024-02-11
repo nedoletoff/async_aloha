@@ -131,12 +131,20 @@ class Channel:
                 return False
         return True
 
+    def is_use(self, t):
+        for i in range(self.M):
+            if self.stations_time[i][0] <= t <= self.stations_time[i][1]:
+                return True
+        return False
+
 
 def async_simulate(lam, T, M, r=0.2, time_interval=0.01):
     m = Messages(lam, T, M, r, time_interval)
     channel = Channel(M, time_interval)
+    collisions = 0
     print(m)
-    for _ in range(T * 10):
+    time = 0
+    for _ in range(T):
         if m.message_num == m.sent_num:
             break
         temp = []
@@ -161,12 +169,14 @@ def async_simulate(lam, T, M, r=0.2, time_interval=0.01):
                 m.queue_added[i] = 1
         res = channel.can_sent(time)
         if res:
-            print(f'{time=} {res=}')
+            # print(f'{time=} {res=}')
             m.send_message(res[0], res[1])
         elif sum([m.queue_added[i] for i in range(m.M)]) > m.M:
             m.move_queue()
+        elif channel.is_use(time):
+            collisions += 1
 
-    return mean(m.get_delay()), m.sent_num, time
+    return mean(m.get_delay()), m.sent_num, time, collisions
 
 
 def test():
@@ -180,14 +190,71 @@ def test():
 
 
 def main():
-    lam = 0.5
+    lam = 0.3
     T = 1000
-    M = 2
+    M = 3
     r = 0.2
     time_interval = 0.001
-    print(async_simulate(lam, T, M, r, time_interval))
+    x = [i / 10 for i in range(1, 15)]
+    temp = []
+    for i in x:
+        temp.append(async_simulate(i, T, M, r, time_interval))
+
+    plt.figure(0)
+    plt.plot(x, [i[0] for i in temp])
+    plt.grid()
+    plt.xlabel("Интенсивность входного потока")
+    plt.ylabel("Среднее время задержки")
+    plt.savefig("ALOHAas_M_D.png")
+
+    plt.figure(1)
+    plt.plot(x, [i[1] for i in temp])
+    plt.grid()
+    plt.xlabel("Интенсивность входного потока")
+    plt.ylabel("Количество отправленных сообщений")
+    plt.savefig("ALOHAas_sent.png")
+
+    plt.figure(2)
+    plt.plot(x, [i[3] for i in temp])
+    plt.grid()
+    plt.xlabel("Интенсивность входного потока")
+    plt.ylabel("Количество коллизий")
+    plt.savefig("ALOHAas_col.png")
+
+    plt.figure(3)
+    plt.plot(x, [i[1] / T for i in temp])
+    plt.grid()
+    plt.xlabel("Интенсивность входного потока")
+    plt.ylabel("Интенсивность выходного потока")
+    plt.savefig("ALOHAas_lam.png")
 
 
+
+    x = [i for i in range(1, 10)]
+    temp = []
+    for i in x:
+        temp.append(async_simulate(lam, T, i, r, time_interval))
+
+    plt.figure(4)
+    plt.plot(x, [i[3] for i in temp])
+    plt.grid()
+    plt.xlabel("Количество абонентов")
+    plt.ylabel("Количество коллизий")
+    plt.savefig("ALOHAas_col2.png")
+
+    plt.figure(5)
+    plt.plot(x, [i[0] for i in temp])
+    plt.grid()
+    plt.xlabel("Количество абонентов")
+    plt.ylabel("Среднее время задержки")
+    plt.savefig("ALOHAas_M_D2.png")
+
+    plt.figure(6)
+    plt.plot(x, [i[1] for i in temp])
+    plt.grid()
+    plt.xlabel("Количество абонентов")
+    plt.ylabel("Количество отправленных сообщений")
+    plt.savefig("ALOHAas_sent2.png")
 
 
 if __name__ == '__main__':
